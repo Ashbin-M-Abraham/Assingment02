@@ -17,7 +17,7 @@
     <form id="smoothieForm">
         <h2>Build Your Smoothie</h2>
 
-        <section>
+        <div id="step1" class="step active">
             <h3>Choose Your Base</h3>
             <select id="base" name="base">
                 <option value="banana">Banana</option>
@@ -26,9 +26,9 @@
                 <option value="kale">Kale</option>
                 <option value="mango">Mango</option>
             </select>
-        </section>
+        </div>
 
-        <section>
+        <div id="step2" class="step active">
             <h3>Add-Ins</h3>
             <input type="checkbox" id="greekYogurt" name="addIns" value="Greek Yogurt">
             <label for="greekYogurt">Greek Yogurt</label>
@@ -40,9 +40,9 @@
             <label for="chiaSeeds">Chia Seeds</label>
             <input type="checkbox" id="honey" name="addIns" value="Honey">
             <label for="honey">Honey</label>
-        </section>
+        </div>
 
-        <section>
+        <div id="step3" class="step">
             <h3>Finishing Touches</h3>
             <input type="checkbox" id="granola" name="finishingTouches" value="Granola">
             <label for="granola">Granola</label>
@@ -52,7 +52,7 @@
             <label for="cinnamon">Cinnamon</label>
             <input type="checkbox" id="mintLeaves" name="finishingTouches" value="Mint Leaves">
             <label for="mintLeaves">Mint Leaves</label>
-        </section>
+        </div>
 
         <button type="submit">Blend My Smoothie!</button>
     </form>
