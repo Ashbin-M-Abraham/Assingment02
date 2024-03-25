@@ -29,9 +29,9 @@ main {
 #images{
     grid-area: images;
     padding:20px;
-    width:  100%;
-    height: auto;
-    object-fit: cover;
+    width:  80%;
+    height: 500px;
+    object-fit: fit;
 }
 
 

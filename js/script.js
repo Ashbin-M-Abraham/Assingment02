@@ -1,141 +1,110 @@
-let currentStep = 1;
+class Smoothie {
+    constructor() {
+        this.size = null;
+        this.base = null;
+        this.addIns = [];
+        this.finishingTouches = [];
+        this.prices = {}; // This will hold the fetched prices data
+    }
 
-function nextStep(step) {
-    // Hide current step
-    document.getElementById(`step${currentStep}`).style.display = 'none';
-    // Show next step
-    document.getElementById(`step${step}`).style.display = 'block';
-    currentStep = step;
+    updatePrices(prices) {
+        this.prices = prices;
+    }
+
+    updateSelections(selections) {
+        this.size = selections.size;
+        this.base = selections.base;
+        this.addIns = selections.addIns;
+        this.finishingTouches = selections.finishingTouches;
+    }
+
+    calculatePrice() {
+        let totalPrice = 0;
+        if (this.size) totalPrice += this.prices.size[this.size];
+        if (this.base) totalPrice += this.prices.bases[this.base];
+        this.addIns.forEach(addIn => totalPrice += this.prices.addIns[addIn]);
+        this.finishingTouches.forEach(touch => totalPrice += this.prices.finishingTouches[touch]);
+        return totalPrice;
+    }
+
+    generateSummary() {
+        let summaryHtml = '<h4>Selected Items:</h4>';
+        let imageHtml = '';
+
+        if (this.base) {
+            const basePrice = this.prices.bases[this.base];
+            summaryHtml += `<p>Base: ${this.base} - $${basePrice}</p>`;
+            if (this.prices.img && this.prices.img[this.base]) {
+                imageHtml = `<img src="${this.prices.img[this.base]}" alt="${this.base}" style="max-width:100%; height:auto;">`;
+            }
+        }
+
+        // Add-Ins
+        this.addIns.forEach(addIn => {
+            const addInPrice = this.prices.addIns[addIn];
+            summaryHtml += `<p>Add-In: ${addIn} - $${addInPrice}</p>`;
+        });
+
+        // Finishing Touches
+        this.finishingTouches.forEach(touch => {
+            const touchPrice = this.prices.finishingTouches[touch];
+            summaryHtml += `<p>Finishing Touch: ${touch} - $${touchPrice}</p>`;
+        });
+
+        let totalPrice = this.calculatePrice();
+        document.getElementById('orderSummary').innerHTML = summaryHtml;
+        document.getElementById('totalPrice').textContent = `Total Price: $${totalPrice.toFixed(2)}`;
+        document.getElementById('images').innerHTML = imageHtml;
+    }
 }
 
-document.getElementById('smoothieForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the form from submitting in the traditional way
-    // Submit the order
-    submitOrder();
-});
-
-function submitOrder() {
-    // This is where you'd handle the order processing
-    alert('Thank you for your order!');
-    
-    // Reset the form and go back to the first step if needed
-    document.getElementById('smoothieForm').reset();
-    nextStep(1);
-}
-let prices = {};  // This will hold the fetched prices data
+// Instantiate the Smoothie object
+let mySmoothie = new Smoothie();
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Initially display only the first step
-    nextStep(1);
-
-    // Fetch the JSON file
     fetch('https://ashbin-m-abraham.github.io/Assingment02/js/ingredients.json')
         .then(response => response.json())
         .then(data => {
-            prices = data;
-            console.log("Prices loaded:", prices);
-            // Initialize summary to reflect initial state
-            updateSummary();
+            mySmoothie.updatePrices(data);
+            mySmoothie.generateSummary(); // Initial summary
         })
-        .catch(error => {
-            console.error('Error fetching the JSON file:', error);
-        });
+        .catch(error => console.error('Error fetching the JSON file:', error));
 
-    // Event listeners for size and base
-    document.querySelectorAll('input[name="size"], #base').forEach(input => {
-        input.addEventListener('change', updateSelectionsAndSummary);
-    });
-
-    // Event listeners for addIns and finishingTouches
-    document.querySelectorAll('input[name="addIns"], input[name="finishingTouches"]').forEach(input => {
+    // Event listeners for the form
+    document.querySelectorAll('input[name="size"], #base, input[name="addIns"], input[name="finishingTouches"]').forEach(input => {
         input.addEventListener('change', updateSelectionsAndSummary);
     });
 
     document.getElementById('smoothieForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the form from submitting in the traditional way
+        event.preventDefault();
         submitOrder();
     });
 });
 
 function updateSelectionsAndSummary() {
-    // Update selections based on user input
-    // Size
-    selections.size = document.querySelector('input[name="size"]:checked')?.value;
-    // Base
-    selections.base = document.getElementById('base').value;
-    // Add-Ins
-    selections.addIns = Array.from(document.querySelectorAll('input[name="addIns"]:checked')).map(e => e.value);
-    // Finishing Touches
-    selections.finishingTouches = Array.from(document.querySelectorAll('input[name="finishingTouches"]:checked')).map(e => e.value);
-
-    updateSummary();
-}
-
-function nextStep(step) {
-    // Hide current step
-    document.getElementById(`step${currentStep}`).style.display = 'none';
-    // Show next step
-    document.getElementById(`step${step}`).style.display = 'block';
-    currentStep = step;
+    let selections = {
+        size: document.querySelector('input[name="size"]:checked')?.value,
+        base: document.getElementById('base').value,
+        addIns: Array.from(document.querySelectorAll('input[name="addIns"]:checked')).map(e => e.value),
+        finishingTouches: Array.from(document.querySelectorAll('input[name="finishingTouches"]:checked')).map(e => e.value),
+    };
+    mySmoothie.updateSelections(selections);
+    mySmoothie.generateSummary();
 }
 
 function submitOrder() {
     alert('Thank you for your order!');
     document.getElementById('smoothieForm').reset();
-    nextStep(1);
-    // Clear selections and update summary
-    selections = { size: null, base: null, addIns: [], finishingTouches: [] };
-    updateSummary();
+    nextStep(1); // Go back to the first step
+    // Clear selections and regenerate the summary
+    mySmoothie.updateSelections({ size: null, base: null, addIns: [], finishingTouches: [] });
+    mySmoothie.generateSummary();
 }
 
-let selections = {
-    size: null, // 'small', 'medium', 'large'
-    base: null, // 'banana', 'strawberry', etc.
-    addIns: [], // ['Greek Yogurt', 'Protein Powder', ...]
-    finishingTouches: [] // ['Granola', 'Coconut Flakes', ...]
-};
-
-function updateSummary() {
-    let summaryHtml = '<h4>Selected Items:</h4>';
-    let totalPrice = 0;
-    let imageHtml = '';
-
-    // Size
-    if (selections.size) {
-        const sizePrice = prices.size[selections.size];
-        summaryHtml += `<p>Size: ${selections.size} - $${sizePrice}</p>`;//learned this from"https://www.w3docs.com/snippets/javascript.html" rather than using document.createElement
-        totalPrice += sizePrice;
-    }
-
-    // Base
-    if (selections.base) {
-        const basePrice = prices.bases[selections.base];
-        summaryHtml += `<p>Base: ${selections.base} - $${basePrice}</p>`;
-        totalPrice += basePrice;
-    }
-    //images
-    if (selections.base && prices.img && prices.img[selections.base]) {
-        imageHtml = `<img src="${prices.img[selections.base]}" alt="${selections.base}" style="width:100%; height:auto;">`;
-    } else {
-        imageHtml = `<p>No base selected.</p>`; // Placeholder text or you can leave it empty
-    }
-
-    // Add-Ins
-    selections.addIns.forEach(addIn => {
-        const addInPrice = prices.addIns[addIn];
-        summaryHtml += `<p>Add-In: ${addIn} - $${addInPrice}</p>`;
-        totalPrice += addInPrice;
-    });
-
-    // Finishing Touches
-    selections.finishingTouches.forEach(touch => {
-        const touchPrice = prices.finishingTouches[touch];
-        summaryHtml += `<p>Finishing Touch: ${touch} - $${touchPrice}</p>`;
-        totalPrice += touchPrice;
-    });
-    // Update DOM elements for order summary and total price
-    document.getElementById('orderSummary').innerHTML = summaryHtml;
-    document.getElementById('totalPrice').textContent = `Total: $${totalPrice.toFixed(2)}`;
-  
-    document.getElementById('images').innerHTML = imageHtml;
+function nextStep(step) {
+    document.getElementById(`step${currentStep}`).style.display = 'none';
+    document.getElementById(`step${step}`).style.display = 'block';
+    currentStep = step;
 }
+
+let currentStep = 1; // Initial step
