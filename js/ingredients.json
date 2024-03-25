@@ -25,11 +25,11 @@
       "Mint Leaves": 0.5
     },
     "img":{
-      "kale":"../img/pineapple-kale-smoothie_06-500x500.jpg",
-      "spinach":"../img/spinach-and-apple-breakfast-smoothie-recipe-1d39cce441ffe279e7cb0d65ce02ccff-1920.jpg",
-      "mango":"../img/mango-banana-smoothie-3.jpg",
-      "banana":"../img/R (1).jpeg",
-      "strawberry":"../img/OSK.jpeg"
+      "kale":"https://ashbin-m-abraham.github.io/Assingment02/img/pineapple-kale-smoothie_06-500x500.jpg",
+      "spinach":"https://ashbin-m-abraham.github.io/Assingment02/img/spinach-and-apple-breakfast-smoothie-recipe-1d39cce441ffe279e7cb0d65ce02ccff-1920.jpg",
+      "mango":"https://ashbin-m-abraham.github.io/Assingment02/img/mango-banana-smoothie-3.jpg",
+      "banana":"https://ashbin-m-abraham.github.io/Assingment02/img/R (1).jpeg",
+      "strawberry":"https://ashbin-m-abraham.github.io/Assingment02/img/OSK.jpeg"
 
 
     }
