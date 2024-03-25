@@ -1,5 +1,5 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     margin: 20px;
     background-color: #f9f9f9;
     color: #333;
@@ -16,8 +16,12 @@ form {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-section {
-    margin-bottom: 20px;
+.step {
+    display: none;
+}
+
+.step.active {
+    display: block;
 }
 
 label {
@@ -25,7 +29,7 @@ label {
     margin: 5px 0px;
 }
 
-input[type="checkbox"] {
+input[type="checkbox"], input[type="radio"] {
     margin-right: 10px;
 }
 
@@ -40,5 +44,5 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #e0dc0a;
 }

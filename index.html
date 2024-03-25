@@ -11,14 +11,25 @@
     <script src="./js/script.js" defer></script>
 </head>
 <body>
+   <header>
     <h1>Tasty Smooty</h1>
     <p>Indulge in a delightful personalized smoothie experience. Customize your perfect blend from a variety of fresh fruits, vegetables, and add-ins.</p>
-
-    <form id="smoothieForm">
+</header>
+    <main>
+        <section>
+        <form id="smoothieForm"></form>
         <h2>Build Your Smoothie</h2>
-
         <div id="step1" class="step active">
-            <h3>Choose Your Base</h3>
+            <h3>Choose Your Size</h3>
+                <input type="radio" id="Small" name="size" value="small">
+                <label for="Small">Small</label><br>
+              
+                <input type="radio" id="Medium" name="size" value="medium">
+                <label for="Medium">Medium</label><br>
+              
+                <input type="radio" id="Large" name="size" value="large">
+                <label for="Large">Large</label><br>
+                <h3>Choose Your Base</h3>
             <select id="base" name="base">
                 <option value="banana">Banana</option>
                 <option value="strawberry">Strawberry</option>
@@ -26,9 +37,10 @@
                 <option value="kale">Kale</option>
                 <option value="mango">Mango</option>
             </select>
+            <button type="button" onclick="nextStep(2)">Add extra</button> 
         </div>
 
-        <div id="step2" class="step active">
+        <div id="step2" class="step">
             <h3>Add-Ins</h3>
             <input type="checkbox" id="greekYogurt" name="addIns" value="Greek Yogurt">
             <label for="greekYogurt">Greek Yogurt</label>
@@ -40,6 +52,7 @@
             <label for="chiaSeeds">Chia Seeds</label>
             <input type="checkbox" id="honey" name="addIns" value="Honey">
             <label for="honey">Honey</label>
+            <button type="button" onclick="nextStep(3)">Add finishing touches</button>
         </div>
 
         <div id="step3" class="step">
@@ -52,11 +65,16 @@
             <label for="cinnamon">Cinnamon</label>
             <input type="checkbox" id="mintLeaves" name="finishingTouches" value="Mint Leaves">
             <label for="mintLeaves">Mint Leaves</label>
+            <button type="submit">Blend My Smoothie!</button>
         </div>
+    </section>
+</main>
+<aside>
+    <h3>Order Summary</h3>
+    <div id="summary" ></div>
+</aside>
+<footer>
 
-        <button type="submit">Blend My Smoothie!</button>
-    </form>
-
-    <script src="app.js"></script>
+</footer>
 </body>
 </html>
