@@ -31,15 +31,9 @@ const selections = {
     addIns: [],
     finishingTouches: []
 };
-const prices = {
-    size: { small: 3, medium: 5, large: 7 },
-    base: { banana: 1, strawberry: 1.5, spinach: 1, kale: 1.5, mango: 2 },
-    addIns: { 'Greek Yogurt': 1, 'Protein Powder': 2, 'Nut Butter': 1.5, 'Chia Seeds': 1, 'Honey': 0.5 },
-    finishingTouches: { 'Granola': 1, 'Coconut Flakes': 1, 'Cinnamon': 0.5, 'Mint Leaves': 0.5 }
-};
 
 // Fetch the JSON file
-fetch('./ingredients.json')
+fetch('https://ashbin-m-abraham.github.io/Assingment02/js/ingredients.json')
   .then(response => response.json())
   .then(data => {
     // Update the selections object with the fetched data
