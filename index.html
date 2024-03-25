@@ -13,22 +13,21 @@
 <body>
    <header>
     <h1>Tasty Smooty</h1>
-    <p>Indulge in a delightful personalized smoothie experience. Customize your perfect blend from a variety of fresh fruits, vegetables, and add-ins.</p>
 </header>
     <main>
         <section>
-        <form id="smoothieForm"></form>
+        <form id="smoothieForm">
         <h2>Build Your Smoothie</h2>
         <div id="step1" class="step active">
             <h3>Choose Your Size</h3>
+            <div class="radio-container"></div>
                 <input type="radio" id="Small" name="size" value="small">
-                <label for="Small">Small</label><br>
-              
+                <label for="Small">Small</label>
                 <input type="radio" id="Medium" name="size" value="medium">
-                <label for="Medium">Medium</label><br>
-              
+                <label for="Medium">Medium</label>
                 <input type="radio" id="Large" name="size" value="large">
                 <label for="Large">Large</label><br>
+                </div>
                 <h3>Choose Your Base</h3>
             <select id="base" name="base">
                 <option value="banana">Banana</option>
@@ -37,6 +36,7 @@
                 <option value="kale">Kale</option>
                 <option value="mango">Mango</option>
             </select>
+            <p></p>
             <button type="button" onclick="nextStep(2)">Add extra</button> 
         </div>
 
@@ -67,11 +67,15 @@
             <label for="mintLeaves">Mint Leaves</label>
             <button type="submit">Blend My Smoothie!</button>
         </div>
+    </form>
     </section>
 </main>
-<aside>
+<div id="images"></div>
+</div>
+<aside class="sidebar">
     <h3>Order Summary</h3>
-    <div id="summary" ></div>
+    <div id="orderSummary" ></div>
+    <div id="totalPrice"></div>
 </aside>
 <footer>
 

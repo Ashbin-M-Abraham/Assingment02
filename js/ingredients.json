@@ -23,6 +23,15 @@
       "Coconut Flakes": 1,
       "Cinnamon": 0.5,
       "Mint Leaves": 0.5
+    },
+    "img":{
+      "kale":"../img/pineapple-kale-smoothie_06-500x500.jpg",
+      "spinach":"../img/spinach-and-apple-breakfast-smoothie-recipe-1d39cce441ffe279e7cb0d65ce02ccff-1920.jpg",
+      "mango":"../img/mango-banana-smoothie-3.jpg",
+      "banana":"../img/R (1).jpeg",
+      "strawberry":"../img/OSK.jpeg"
+
+
     }
   }
   
